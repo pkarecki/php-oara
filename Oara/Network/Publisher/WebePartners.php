@@ -184,8 +184,7 @@ class WebePartners extends \Oara\Network
         $data = \file_get_contents("http://api.webepartners.pl/wydawca/Auctions?from=$from", false, $context);
         $dataArray = \json_decode($data, true);
         foreach ($dataArray as $transactionObject) {
-
-            if (isset($merchantIdList[$transactionObject["programId"]])) {
+            if (is_null($merchantList) || isset($merchantIdList[$transactionObject["programId"]])) {
                 $transaction = Array();
                 $transaction['merchantId'] = $transactionObject["programId"];
                 $transaction['date'] = $transactionObject["auctionDate"];
